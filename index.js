@@ -11,13 +11,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 const EMAIL = process.env.EMAIL;
-app.use((req, res) => {
-  res.status(404).json({
-    is_success: false,
-    official_email: EMAIL,
-    error: "Route not found",
-  });
-});
 
 function generateFibonacci(n) {
   if (typeof n !== "number" || n < 0) return null;
@@ -144,6 +137,13 @@ app.post("/bfhl", async (req, res) => {
       error: "Internal server error",
     });
   }
+});
+app.use((req, res) => {
+  res.status(404).json({
+    is_success: false,
+    official_email: EMAIL,
+    error: "Route not found",
+  });
 });
 
 app.listen(PORT, () => {
